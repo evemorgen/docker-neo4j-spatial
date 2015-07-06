@@ -1,6 +1,10 @@
-# Neo4j Community Edition 2.2.1
+# Neo4j Community Edition 2.2.1 with spatial plugins
 
-This repository contains a Docker image of the latest version (2.2.1) of the [Neo4j community server](http://www.neo4j.com/download). This Docker image of Neo4j provides instructions on how to map a Docker data volume to an already existing `data/graph.db` store file located on your host machine.
+This repository contains a Docker image of the latest version (2.2.1) of the [Neo4j community server](http://www.neo4j.com/download) with spatial plugins (https://github.com/neo4j-contrib/spatial). This Docker image of Neo4j provides instructions on how to map a Docker data volume to an already existing `data/graph.db` store file located on your host machine.
+
+# Fork
+
+This repo is a fork of Ken Bastani's docker-neo4j (https://github.com/kbastani/docker-neo4j)
 
 # What is Neo4j?
 
@@ -11,7 +15,7 @@ Sponsored by Neo Technology, Neo4j is an open-source NoSQL graph database implem
 To build the source from the Dockerfile as an image:
 
 ```
-docker build -t kbastani/docker-neo4j .
+docker build -t jeffreyjharris/docker-neo4j-spatial .
 ```
 
 # Pull Docker Image
@@ -19,7 +23,7 @@ docker build -t kbastani/docker-neo4j .
 This image is automatically built and is available from the Docker registry. Use the following `pull` command to download the image to your local Docker server.
 
 ```
-docker pull kbastani/docker-neo4j
+docker pull jeffreyjharris/docker-neo4j-spatial
 ```
 
 # Start Neo4j Container
@@ -27,7 +31,7 @@ docker pull kbastani/docker-neo4j
 To run the Neo4j image inside a container after either building it or pulling it, run the following docker command.
 
 ```
-docker run -d -p 7474:7474 -v /Users/<user>/path/to/neo4j/data:/opt/data --name graphdb kbastani/docker-neo4j
+docker run -d -p 7474:7474 -v /Users/<user>/path/to/neo4j/data:/opt/data --name graphdb jeffreyjharris/docker-neo4j-spatial
 ```
 
 Make sure to replace the `<user>` with the user directory that contains your Neo4j `graph.db` data store files.

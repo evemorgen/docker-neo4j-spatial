@@ -1,10 +1,8 @@
 #
-# Dockerizing Neo4j graph database (http://www.github.com/kbastani/docker-neo4j)
+# Dockerizing Neo4j graph database (http://www.github.com/jeffreyjharris/docker-neo4j-spatial)
 #
 FROM       java:openjdk-8-jdk
-MAINTAINER K.B. Name <kb@socialmoon.com>
-
-ENV HDFS_HOST hdfs://hdfs:9000
+MAINTAINER Jeff Harris <jeffreyjharris@mail.com>
 
 # Install Neo4j
 RUN wget -O - http://debian.neo4j.org/neotechnology.gpg.key | apt-key add - && \
@@ -13,7 +11,7 @@ RUN wget -O - http://debian.neo4j.org/neotechnology.gpg.key | apt-key add - && \
 
 WORKDIR /var/lib/neo4j
 
-# Copy graph analytics plugin
+# Copy plugins to the container — e.g., the spatial plugin
 COPY plugins /var/lib/neo4j/plugins
 
 # Copy configurations
@@ -24,7 +22,7 @@ COPY sbin/bootstrap.sh /etc/bootstrap.sh
 RUN chown root:root /etc/bootstrap.sh && \
     chmod 700 /etc/bootstrap.sh
 
-# Customize configurations
+# Customize configurations (alternatively customize conf/neo4j-server.properties before building container)
 RUN apt-get clean && \
     sed -i "s|data/graph.db|/opt/data/graph.db|g" /var/lib/neo4j/conf/neo4j-server.properties && \
     sed -i "s|dbms.security.auth_enabled=true|dbms.security.auth_enabled=false|g" /var/lib/neo4j/conf/neo4j-server.properties && \
