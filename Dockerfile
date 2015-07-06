@@ -29,6 +29,13 @@ RUN apt-get clean && \
     sed -i "s|#org.neo4j.server.webserver.address|org.neo4j.server.webserver.address|g" /var/lib/neo4j/conf/neo4j-server.properties && \
 #    sed -i "s|#org.neo4j.server.thirdparty_jaxrs_classes=org.neo4j.examples.server.unmanaged=/examples/unmanaged|org.neo4j.server.thirdparty_jaxrs_classes=extension=/service|g" /var/lib/neo4j/conf/neo4j-server.properties
 
+# issue running Neo4J with RRDs under VirtualBox on OS X
+# see https://www.mail-archive.com/neo4j@googlegroups.com/msg07887.html
+    sed -i -e "s|org.neo4j.server.webadmin.rrdb.location=.*|org.neo4j.server.webadmin.rrdb.location=/tmp/rrd|g" /var/lib/neo4j/conf/neo4j-server.properties && \
+    touch /tmp/rrd
+
+
+
 # Expose the Neo4j browser to the host OS on port 7474, 7473 and 1337
 EXPOSE 7474
 EXPOSE 7473
